@@ -10,8 +10,8 @@ class Quadratic {
 	friend Quadratic subtract(Quadratic& q1, Quadratic& q2);
 public:
 	Quadratic(double a, double b, double c);
-	std::string toString();       // ax^2+bx+c=0 format�� string ����
-	void solve();                 // ������������ �ظ� ���ؼ� ���
+	std::string toString();       // ax^2+bx+c=0 format의 string 리턴
+	void solve();                 // 이차방정식의 해를 구해서 출력
 private:
 	double a{ 1 };
 	double b{ 0 };
@@ -26,12 +26,12 @@ Quadratic::Quadratic(double a, double b, double c)
 		this->b = b;
 		this->c = c;
 	}
-	else throw invalid_argument("2������ ����� 0�� �ƴϾ���մϴ�.");
+	else throw invalid_argument("2차항의 계수는 0이 아니어야합니다."); // 예외처리는 <stdexcept>를 굳이 안불러와도 된다. 근데 왜 메시지는 안뜨지?
 }
 
 std::string Quadratic::toString()
 {
-	ostringstream output;
+	ostringstream output; // <sstream> 라이브러리의 ostringstream 타입은 출력하고자 하는 문자열을 변수에 저장할 수 있다. 해당 변수를 호출하면 자동 출력!
 
 	if(b < 0 && (c > 0 || c == 0))
 		output << a << "x^2" << b << "x" << "+" << c << "=" << "0";
@@ -103,5 +103,5 @@ int main() {
 	cout << "(" << a.toString() << ")+(" << b.toString() << ")" << "=" << add(a, b).toString() << '\n';
 	cout << "(" << a.toString() << ")-(" << b.toString() << ")" << "=" << subtract(a, b).toString() << '\n';
 
-	return 0;
+	return 0; // 왜 자꾸 return 0을 빼먹냐ㅑ.. main 함수는 값을 리턴해야 합니다 오류 뜨자나
 }
